@@ -32,11 +32,11 @@ function Player( First, Socket )
 	this.playerNum = Base;
 }
 
-
-var io = require('socket.io')();
+var app = http.createServer();
+var io = require('socket.io')(app);
 io.on('connection', function(socket){
 	console.log('new connection');
-	client.on('Game Setup', function (data) 
+	client.on('GameSetup', function (data) 
 	{
 		console.log('howdy');
 		if (First){
@@ -70,7 +70,7 @@ io.on('connection', function(socket){
 		}
 	});
 });
-io.listen(1357);
+app.listen(1357);
 
 // Create an S3 client
 // var s3 = new AWS.S3();

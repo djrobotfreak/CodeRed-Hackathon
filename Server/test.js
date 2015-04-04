@@ -16,6 +16,7 @@ var socketOut = ioOut.connect('http://localhost:8321');
 
 ioIn.on('connection', function(socketIn) {
   socketIn.on('foo', function(msg) {
+  	console.log(msg);
     socketOut.emit('bar', msg);
   });
 });
@@ -25,4 +26,4 @@ var io2 = require('socket.io-client');
 var socket2 = io2.connect('54.149.110.214:1357');
 
 var msg2 = "hello";
-socket2.emit('bar', msg2);
+socket2.emit('GameSetup', msg2);
