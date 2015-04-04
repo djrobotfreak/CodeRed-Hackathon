@@ -50,8 +50,8 @@ io.on('connection', function(socket){
 		else{
 			player2 = new Player(false, socket);
 			First = true;
-			player2.socket.emit('Start', "");
-			player1.socket.emit('Start', "");
+			player2.socket.emit('GameStart', JSON.stringify({'player': 2}));
+			player1.socket.emit('GameStart', JSON.stringify({'player': 1}));
 		}
 	});
 	socket.on('Move', function(data){
