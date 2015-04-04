@@ -41,29 +41,29 @@ io.on('connection', function(socket){
 		if (First){
 			player1 = new Player(true, socket);
 			First = false;
-			player1.socket.emit('Pregame');
+			player1.socket.emit('Pregame', "");
 		}
 		else{
 			player2 = new Player(false, socket);
 			First = true;
-			player2.socket.emit('Start');
-			player1.socket.emit('Start');
+			player2.socket.emit('Start', "");
+			player1.socket.emit('Start', "");
 		}
 	});
 	client.on('Move', function(data){
 		if (player1.socket == socket){
-			player2.socket.emit(data);
+			player2.socket.emit('move', data);
 		}
 		else{
-			player1.socket.emit(data);
+			player1.socket.emit('move', data);
 		}
 	});
 	client.on('Shoot', function(data){
 		if (player1.socket == socket){
-			player2.socket.emit(data);
+			player2.socket.emit('shoot',data);
 		}
 		else{
-			player1.socket.emit(data);
+			player1.socket.emit('shoot',data);
 		}
 	});
 });
