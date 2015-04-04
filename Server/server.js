@@ -31,6 +31,16 @@ function Player( First, Socket )
 	this.socket = Socket;
 	this.playerNum = Base;
 }
+var io1 = require('socket.io').listen(8321);
+
+io1.on('connection', function(socket1) {
+  socket1.on('bar', function(msg1) {
+    console.log(msg1);
+  });
+});
+
+
+
 
 
 var io = require('socket.io')();
