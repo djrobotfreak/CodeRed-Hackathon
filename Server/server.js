@@ -38,7 +38,7 @@ var app = http.createServer();
 var io = require('socket.io')(app);
 io.on('connection', function(socket){
 	console.log('new connection');
-	client.on('GameSetup', function (data) 
+	socket.on('GameSetup', function (data) 
 	{
 		console.log('howdy');
 		if (First){
@@ -53,7 +53,7 @@ io.on('connection', function(socket){
 			player1.socket.emit('Start', "");
 		}
 	});
-	client.on('Move', function(data){
+	socket.on('Move', function(data){
 		console.log('howdy');
 		if (player1.socket == socket){
 			player2.socket.emit('move', data);
@@ -62,7 +62,7 @@ io.on('connection', function(socket){
 			player1.socket.emit('move', data);
 		}
 	});
-	client.on('Shoot', function(data){
+	socket.on('Shoot', function(data){
 		console.log('howdy');
 		if (player1.socket == socket){
 			player2.socket.emit('shoot',data);

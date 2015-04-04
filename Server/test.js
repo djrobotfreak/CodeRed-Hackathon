@@ -23,7 +23,7 @@ ioIn.on('connection', function(socketIn) {
 
 // Client
 var io2 = require('socket.io-client');
-var socket2 = io2.connect('54.149.110.214:1357');
+var socket2 = io2.connect('http://54.149.110.214:1357');
 
 var msg2 = "hello";
 socket2.emit('GameSetup', msg2);
