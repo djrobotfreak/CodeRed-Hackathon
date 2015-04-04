@@ -4,8 +4,19 @@ using System.Collections.Generic;
 using System;
 using SimpleJSON;
 
-public class Networking : MonoBehaviour {
+
+public class MyScript : Networking {
 	// Use this for initialization
+	public static int IntParseFast(string value)
+	{
+		int result = 0;
+		for (int i = 0; i < value.Length; i++)
+		{
+			char letter = value[i];
+			result = 10 * result + (letter - 48);
+		}
+		return result;
+	}
 	SocketIOClient.Client socket;
 	
 	void Start () {
@@ -18,38 +29,41 @@ public class Networking : MonoBehaviour {
 		});
 		socket.On("Pregame", (data) => {
 			Debug.Log (data.Json.ToJsonString());
+			var N = JSON.Parse(data.Json.ToJsonString());
+			string val = N["args"][0];
+			Debug.Log("data");
+			Debug.Log(val);
 		});
 		socket.On("GameStart", (data) => {
-			Debug.Log (data.Json.ToJsonString());
+			var N = JSON.Parse(data.Json.ToJsonString());
+			string temp = N["args"][0]["player"];
+			int val = IntParseFast(temp);
+			Debug.Log (val);
 
 		});
+		socket.On("Move", (data) => {
+			var N = JSON.Parse(data.Json.ToJsonString());
+			float x = float.Parse(N["args"][0]["x"]);
+			float y = float.Parse(N["args"][0]["y"]);
+			float dir = float.Parse(N["args"][0]["dir"]);
+			string timestamp = float.Parse (N["args"][0]["timestamp"]);
+			Debug.Log ("Move");
+		});
+		socket.On("Shoot", (data) => {
+			var N = JSON.Parse(data.Json.ToJsonString());
+			float x = float.Parse(N["args"][0]["x"]);
+			float y = float.Parse(N["args"][0]["y"]);
+			float dir = float.Parse(N["args"][0]["dir"]);
+			string timestamp = float.Parse (N["args"][0]["timestamp"]);
+			Debug.Log ("Move");
+		});
+
 		socket.Error += (sender, e) => {
 			Debug.Log ("socket Error: " + e.Message.ToString() + sender);
 		};
 		socket.Connect();
 	}
 
-	
-//	private void SocketOpened (object sender, EventArgs e){
-//		Debug.Log("socket opened");
-//		this.socket.Emit("GameSetup", "");
-//	}
-//	
-//	private void SocketMessage (object sender, MessageEventArgs e) {
-//		if ( e!= null && e.Message.Event == "Pregame") {
-//			string msg = e.Message.MessageText;
-//			Debug.Log("socket message: " + msg);
-//		}
-//	}
-//	
-//	private void SocketConnectionClosed (object sender, EventArgs e) {
-//		Debug.Log("socket closed");
-//	}
-//	
-//	private void SocketError (object sender, MessageEventArgs e) {
-//		Debug.Log("socket error: " + e.Message);
-//	}
-	
 	// Update is called once per frame
 	void Update () {
 		
