@@ -57,9 +57,11 @@ io.on('connection', function(socket){
 	socket.on('Move', function(data){
 		console.log('move');
 		if (player1){
+			console.log('sending move to player 1');
 			player1.socket.emit('Move', data);
 		}
 		if (player2){
+			console.log('sending move to player 2');
 			player2.socket.emit('Move', data);
 		}
 		// if (player1.socket == socket){
