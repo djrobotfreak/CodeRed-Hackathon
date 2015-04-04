@@ -20,7 +20,7 @@ console.log('Im starting');
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
 var http = require('http'),
-    fs = require('fs'),
+    fs = require('fs');
 // The node.js HTTP server.
 var First = true;
 var player1;
