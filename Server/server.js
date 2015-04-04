@@ -41,11 +41,11 @@ io.on('connection', function(socket){
 	console.log('new connection');
 	socket.on('GameSetup', function (data) 
 	{
-		console.log('howdy');
+		console.log('setup');
 		if (First){
 			player1 = new Player(true, socket);
 			First = false;
-			player1.socket.emit('Pregame', "howdy");
+			player1.socket.emit('Pregame', "howdy :D");
 		}
 		else{
 			player2 = new Player(false, socket);
@@ -55,7 +55,7 @@ io.on('connection', function(socket){
 		}
 	});
 	socket.on('Move', function(data){
-		console.log('howdy');
+		console.log('move');
 		if (player1){
 			player1.socket.emit('Move', data);
 		}
@@ -70,7 +70,7 @@ io.on('connection', function(socket){
 		// }
 	});
 	socket.on('Shoot', function(data){
-		console.log('howdy');
+		console.log('shoot');
 		// player2.socket.emit('Shoot',data);
 		player1.socket.emit('Shoot',data);
 		// if (player1.socket == socket){
