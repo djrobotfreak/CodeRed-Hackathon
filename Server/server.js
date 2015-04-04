@@ -17,18 +17,12 @@
 // Load the SDK and UUID
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
-var app = require('http').createServer(handler);
 // The node.js HTTP server.
-var app = require('http').createServer(handler);
 
 // The socket.io WebSocket server, running with the node.js server.
-var io = require('socket.io').listen(app);
-
-// Allows access to local file system.
-var fs = require('fs');
-
-// Listen on a high port.
-app.listen(1357);
+var io = require('socket.io')();
+io.on('connection', function(socket){});
+io.listen(1357);
 
 // Create an S3 client
 var s3 = new AWS.S3();
