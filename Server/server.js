@@ -56,21 +56,29 @@ io.on('connection', function(socket){
 	});
 	socket.on('Move', function(data){
 		console.log('howdy');
-		if (player1.socket == socket){
+		if (player1){
 			player2.socket.emit('move', data);
 		}
-		else{
+		if (player2){
 			player1.socket.emit('move', data);
 		}
+		// if (player1.socket == socket){
+		// 	player2.socket.emit('move', data);
+		// }
+		// else{
+		// 	player1.socket.emit('move', data);
+		// }
 	});
 	socket.on('Shoot', function(data){
 		console.log('howdy');
-		if (player1.socket == socket){
-			player2.socket.emit('shoot',data);
-		}
-		else{
-			player1.socket.emit('hoot',data);
-		}
+		player2.socket.emit('shoot',data);
+		player1.socket.emit('shoot',data);
+		// if (player1.socket == socket){
+		// 	player2.socket.emit('shoot',data);
+		// }
+		// else{
+		// 	player1.socket.emit('shoot',data);
+		// }
 	});
 });
 

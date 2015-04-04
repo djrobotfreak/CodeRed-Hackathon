@@ -18,7 +18,15 @@ public class MyScript : Networking {
 		return result;
 	}
 	SocketIOClient.Client socket;
-	
+	public static String GetTimestamp(this DateTime value)
+	{
+	    return value.ToString("yyyyMMddHHmmssfff");
+	}
+
+	public void Move(float x, float y, float dir){
+		string timestamp = GetTimestamp(DateTime.now());
+	}
+
 	void Start () {
 		
 		socket = new SocketIOClient.Client("http://54.149.110.214:1357");
