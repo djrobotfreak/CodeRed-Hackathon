@@ -45,7 +45,7 @@ io.on('connection', function(socket){
 		if (First){
 			player1 = new Player(true, socket);
 			First = false;
-			player1.socket.emit('Pregame', "");
+			player1.socket.emit('Pregame', "howdy");
 		}
 		else{
 			player2 = new Player(false, socket);
