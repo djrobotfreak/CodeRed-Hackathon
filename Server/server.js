@@ -18,14 +18,56 @@
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
 // The node.js HTTP server.
-
+var First = true;
+var player1;
+var player2;
 // The socket.io WebSocket server, running with the node.js server.
+
+function Player( First, Socket )
+{
+    this.first = first;
+	this.socket = Socket;
+	this.playerNum = Base;
+}
+
+
 var io = require('socket.io')();
-io.on('connection', function(socket){});
+io.on('connection', function(socket){
+	client.on('Game Setup', function (data) 
+	{
+		if (First){
+			player1 = new Player(true, socket);
+			First = false;
+			player1.socket.emit('Pregame');
+		}
+		else{
+			player2 = new Player(false, socket);
+			First = true;
+			player2.socket.emit('Start');
+			player1.socket.emit('Start');
+		}
+	});
+	client.on('Move', function(data){
+		if (player1.socket == socket){
+			player2.socket.emit(data);
+		}
+		else{
+			player1.socket.emit(data);
+		}
+	});
+	client.on('Shoot', function(data){
+		if (player1.socket == socket){
+			player2.socket.emit(data);
+		}
+		else{
+			player1.socket.emit(data);
+		}
+	});
+});
 io.listen(1357);
 
 // Create an S3 client
-var s3 = new AWS.S3();
+// var s3 = new AWS.S3();
 
 
 
