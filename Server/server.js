@@ -31,7 +31,6 @@ function Player( First, Socket )
 {
     this.first = First;
 	this.socket = Socket;
-	this.playerNum = Base;
 }
 
 var app = http.createServer();
