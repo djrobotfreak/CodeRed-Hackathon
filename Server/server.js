@@ -56,31 +56,31 @@ io.on('connection', function(socket){
 	});
 	socket.on('Move', function(data){
 		console.log('move');
-		if (player1){
-			console.log('sending move to player 1');
-			player1.socket.emit('Move', JSON.parse(data));
-		}
 		if (player2){
-			console.log('sending move to player 2');
-			player2.socket.emit('Move', JSON.parse(data));
+			if (player2.socket == socket){
+				player1.socket.emit('Move', data);
+			}
 		}
-		// if (player1.socket == socket){
-		// 	player2.socket.emit('move', data);
-		// }
-		// else{
-		// 	player1.socket.emit('move', data);
-		// }
+		else if (player1){
+			if (player1.socket == socket){
+				player2.socket.emit('Move', data);
+			}
+		}
 	});
 	socket.on('Shoot', function(data){
 		console.log('shoot');
-		player2.socket.emit('Shoot',JSON.parse(data));
-		player1.socket.emit('Shoot',JSON.parse(data));
-		// if (player1.socket == socket){
-		// 	player2.socket.emit('shoot',data);
-		// }
-		// else{
-		// 	player1.socket.emit('shoot',data);
-		// }
+		// player2.socket.emit('Shoot',JSON.parse(data));
+		// player1.socket.emit('Shoot',JSON.parse(data));
+		if (player2){
+			if (player2.socket == socket){
+				player1.socket.emit('Shoot', data);
+			}
+		}
+		else if (player1){
+			if (player1.socket == socket){
+				player2.socket.emit('Shoot', data);
+			}
+		}
 	});
 });
 
