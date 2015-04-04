@@ -14,6 +14,8 @@
  * limitations under the License.
 **/
 
+
+console.log('Im starting');
 // Load the SDK and UUID
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
@@ -33,6 +35,7 @@ function Player( First, Socket )
 
 var io = require('socket.io')();
 io.on('connection', function(socket){
+	console.log('new connection');
 	client.on('Game Setup', function (data) 
 	{
 		if (First){
