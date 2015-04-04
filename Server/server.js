@@ -31,16 +31,6 @@ function Player( First, Socket )
 	this.socket = Socket;
 	this.playerNum = Base;
 }
-var io1 = require('socket.io').listen(8321);
-
-io1.on('connection', function(socket1) {
-  socket1.on('bar', function(msg1) {
-    console.log(msg1);
-  });
-});
-
-
-
 
 
 var io = require('socket.io')();
@@ -48,6 +38,7 @@ io.on('connection', function(socket){
 	console.log('new connection');
 	client.on('Game Setup', function (data) 
 	{
+		console.log('howdy');
 		if (First){
 			player1 = new Player(true, socket);
 			First = false;
@@ -61,6 +52,7 @@ io.on('connection', function(socket){
 		}
 	});
 	client.on('Move', function(data){
+		console.log('howdy');
 		if (player1.socket == socket){
 			player2.socket.emit('move', data);
 		}
@@ -69,11 +61,12 @@ io.on('connection', function(socket){
 		}
 	});
 	client.on('Shoot', function(data){
+		console.log('howdy');
 		if (player1.socket == socket){
 			player2.socket.emit('shoot',data);
 		}
 		else{
-			player1.socket.emit('shoot',data);
+			player1.socket.emit('hoot',data);
 		}
 	});
 });

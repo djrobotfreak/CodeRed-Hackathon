@@ -22,7 +22,7 @@ ioIn.on('connection', function(socketIn) {
 
 // Client
 var io2 = require('socket.io-client');
-var socket2 = io2.connect('http://localhost:8123');
+var socket2 = io2.connect('54.149.110.214:1357');
 
 var msg2 = "hello";
-socket2.emit('foo', msg2);
+socket2.emit('bar', msg2);
