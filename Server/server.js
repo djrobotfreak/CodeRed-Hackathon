@@ -19,8 +19,11 @@ console.log('Im starting');
 // Load the SDK and UUID
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
-var http = require('http'),
-    fs = require('fs');
+var io = require('socket.io');
+var express = require('express');
+var app = express()
+  , server = require('http').createServer(app)
+  , io = io.listen(server);
 // The node.js HTTP server.
 var First = true;
 var player1;
@@ -33,8 +36,7 @@ function Player( First, Socket )
 	this.socket = Socket;
 }
 
-var app = http.createServer();
-var io = require('socket.io')(app);
+server.listen(1357);
 io.on('connection', function(socket){
 	console.log('new connection');
 	socket.on('GameSetup', function (data) 
@@ -71,7 +73,6 @@ io.on('connection', function(socket){
 		}
 	});
 });
-app.listen(1357);
 
 // Create an S3 client
 // var s3 = new AWS.S3();
