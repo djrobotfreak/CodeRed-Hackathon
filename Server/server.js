@@ -29,7 +29,7 @@ var player2;
 
 function Player( First, Socket )
 {
-    this.first = first;
+    this.first = First;
 	this.socket = Socket;
 	this.playerNum = Base;
 }
